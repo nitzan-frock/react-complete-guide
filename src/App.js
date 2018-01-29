@@ -47,16 +47,8 @@ class App extends Component {
   }
 
   render() {
-    const style = {
-      backgroundColor: 'green',
-      color: 'white',
-      font: 'inherit',
-      border: '1px solid blue',
-      padding: '8px',
-      cursor: 'pointer',
-    };
-
     let persons = null;
+    let btnClass = '';
 
     if (this.state.showPersons) {
       persons = (
@@ -72,7 +64,7 @@ class App extends Component {
         </div>
       );
 
-      style.backgroundColor = 'red';
+      btnClass = classes.Red;
     }
     
     // will turn this array of strings into one string with a space: "red bold"
@@ -91,7 +83,7 @@ class App extends Component {
         <h1>This is a React App</h1>
         <p className={assignedClasses.join(' ')}>This is really working!</p>
         <button 
-          style={style}
+          className={btnClass}
           onClick={this.togglePersonHandler}>Toggle Persons</button>
         {persons}
       </div>
