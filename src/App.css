@@ -31,10 +31,3 @@
 .App button.Red:hover {
   background-color: salmon;
 }
-
-/* media Quries that are not dynamic
-/* @media (min-width: 500px) {
-  .Person {
-    width: 450px;
-  }
-} */
