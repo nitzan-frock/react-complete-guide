@@ -1,19 +1,43 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 
 import classes from './App.css';
 import Persons from '../components/Persons/Persons';
 import Cockpit from '../components/Cockpit/Cockpit';
+import withClass from '../hoc/withClass';
+import Aux from '../hoc/Auxillary';
 
-class App extends Component {
-  state = {
-    persons: [
-      {id: 'sdds1ff2', name: 'Nitzan', age: 24},
-      {id: 'sdfe2r3g', name: 'Kirill', age: 24},
-      {id: 'sdergrf2', name: 'Alli', age: 25}
-    ],
-    otherState: 'Some other value',
-    showPersons: false,
+class App extends PureComponent {
+  constructor(props) {
+    super(props);
+    console.log('[App.js] Inside Contructor', props);
+    this.state = {
+      persons: [
+        {id: 'sdds1ff2', name: 'Nitzan', age: 24},
+        {id: 'sdfe2r3g', name: 'Kirill', age: 24},
+        {id: 'sdergrf2', name: 'Alli', age: 25}
+      ],
+      otherState: 'Some other value',
+      showPersons: false,
+    }
   }
+
+  componentWillMount(){
+    console.log('[App.js] Inside componentWillMount()');
+  }
+
+  componentDidMount() {
+    console.log('[App.js] Inside componentDidMount()');
+  }
+
+  // state = {
+  //   persons: [
+  //     {id: 'sdds1ff2', name: 'Nitzan', age: 24},
+  //     {id: 'sdfe2r3g', name: 'Kirill', age: 24},
+  //     {id: 'sdergrf2', name: 'Alli', age: 25}
+  //   ],
+  //   otherState: 'Some other value',
+  //   showPersons: false,
+  // }
 
   nameChangedHandler = (event, id) => {
     const personIndex = this.state.persons.findIndex(p => {
@@ -49,30 +73,31 @@ class App extends Component {
   }
 
   render() {
+    console.log('[App.js] Inside render()');
     let persons = null;
 
     if (this.state.showPersons) {
       persons = 
-          <Persons 
-            persons={this.state.persons}
-            clicked={this.deletePersonHandler}
-            changed={this.nameChangedHandler}
-          />;
-
+        <Persons 
+          persons={this.state.persons}
+          clicked={this.deletePersonHandler}
+          changed={this.nameChangedHandler}
+        />;
     }
 
     return (
-      <div className={classes.App}>
+      <Aux>
+        <button onClick={() => {this.setState({showPersons: true})}}>Show Persons</button>
         <Cockpit
           appTitle={this.props.title}
           showPersons={this.state.showPersons}
           persons={this.state.persons} 
           clicked={this.togglePersonHandler} />
         {persons}
-      </div>
+      </Aux>
     );
   }
 }
 
 // higher order component
-export default App;
+export default withClass(App, classes.app);
