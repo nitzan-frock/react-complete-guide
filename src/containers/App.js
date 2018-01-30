@@ -18,6 +18,7 @@ class App extends PureComponent {
       ],
       otherState: 'Some other value',
       showPersons: false,
+      toggleClickedCounter: 0,
     }
   }
 
@@ -62,7 +63,12 @@ class App extends PureComponent {
 
   togglePersonHandler = () => {
     const doesShow = this.state.showPersons;
-    this.setState({showPersons: !doesShow});
+    this.setState((prevState, props) => {
+      return {
+        showPersons: !doesShow,
+        toggleClickedCounter: prevState.toggleClickedCounter + 1,
+      }
+    });
   }
 
   deletePersonHandler = (personIndex) => {
@@ -100,4 +106,4 @@ class App extends PureComponent {
 }
 
 // higher order component
-export default withClass(App, classes.app);
+export default withClass(App, classes.App);
