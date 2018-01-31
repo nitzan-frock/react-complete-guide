@@ -105,5 +105,4 @@ class App extends PureComponent {
   }
 }
 
-// higher order component
 export default withClass(App, classes.App);
